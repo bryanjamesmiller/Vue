@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!-- Container for your MVC "view" (Vue) - Vue only knows about what's inside-->
+<div id="app">
+    <h1>{{ message }}</h1>
+    <input v-model="message">  <!-- Updating this form will also update the heading -->
+
+    <pre>
+        {{$data | json}}
+    </pre>
+</div>
+
+
+<div id="error_message">
+    <form>
+        <span class="error" v-show="!message">
+            You must enter a message
+        </span>
+
+        <textarea v-model="message">
+
+        </textarea>
+
+        <button type="submit" v-show="message">
+            Send Message
+        </button>
+    </form>
+
+    <pre>
+        {{$data | json}}
+    </pre>
+
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.min.js"></script>
+<script>
+    //Your data model, like the MVC "model"
+    var data = {
+        message:'Hello World'
+    };
+
+    // Your Vue-Model that binds to the view and binds to the data
+    // so it's kind of like a MVC "controller"
+    new Vue({
+        el:'#app',
+        data:data
+    });
+</script>
+<script>
+    var data = {
+        message:''
+    };
+
+    new Vue({
+        el:'#error_message'
+    });
+</script>
+</body>
+</html>
