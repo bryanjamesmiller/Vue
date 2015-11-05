@@ -19,6 +19,7 @@
 
 <div id="error_message">
     <form>
+        <!-- note that v-show and v-if are conditional statements, notice the not sign "!" -->
         <span class="error" v-show="!message">
             You must enter a message
         </span>
@@ -27,6 +28,7 @@
 
         </textarea>
 
+        <!-- v-show and v-if are conditional statements, no not sign here "!" -->
         <button type="submit" v-show="message">
             Send Message
         </button>
