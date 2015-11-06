@@ -63,7 +63,20 @@
     </button>
 </div>
 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.min.js"></script>
+<div id="two_counters">
+    <counter subject="Likes"></counter>
+    <counter subject="Dislikes"></counter>
+</div>
+
+<!-- Notice the template goes outside of the Vue's scope with the div and id above-->
+<template id="counter-template">
+    <h1>{{ subject }}</h1>
+    <button @click="counters += 1">{{counters}}</button>
+</template>
+
+
+<!-- Get full warnings in the developer console by not using the minified version of Vue-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.js"></script>
 <script>
     //Your data model, like the MVC "model"
     var data = {
@@ -93,7 +106,7 @@
     };
 
     new Vue({
-       el:'#submitter',
+        el:'#submitter',
         data:data,
         methods:{
             handleIt:function(e){
@@ -104,6 +117,25 @@
                 this.count += 1;
             }
         }
+    });
+</script>
+
+<script>
+    //Name the 'counter' tag you want to use as a component, such as <counter></counter>
+    //Also, notice you have to initialize the counter by returning it as a function in the
+    // below way with the "count" variable set to 0.
+    Vue.component('counter', {
+        template:'#counter-template',
+        props:['subject'],
+        data:function(){
+            return {
+                counters:0
+            }
+        }
+    });
+
+    new Vue({
+        el:'#two_counters'
     });
 </script>
 </body>
