@@ -64,8 +64,8 @@
 </div>
 
 <div id="two_counters">
-    <counter subject="Likes"></counter>
-    <counter subject="Dislikes"></counter>
+    <x-counter subject="Likes"></x-counter>
+    <x-counter subject="Dislikes"></x-counter>
 </div>
 
 <!-- Notice the template goes outside of the Vue's scope with the div and id above-->
@@ -121,22 +121,45 @@
 </script>
 
 <script>
-    //Name the 'counter' tag you want to use as a component, such as <counter></counter>
+    //Name the 'x-counter' tag you want to use as a component, such as <x-counter></x-counter>
+    //Component names are supposed to have a dash in them.
     //Also, notice you have to initialize the counter by returning it as a function in the
     // below way with the "count" variable set to 0.
-    Vue.component('counter', {
+    // This is a global component and it can go within any Vue with any ID, as long as
+    // this component is declared before that Vue.  Thus in this case, the below
+    // component will only work for the Vue with an ID of #two_counters that is below it.
+    Vue.component('x-counter', {
         template:'#counter-template',
         props:['subject'],
         data:function(){
             return {
                 counters:0
-            }
+            };
         }
     });
 
     new Vue({
         el:'#two_counters'
     });
+
+    // If you don't want the component to be global, here is how to nest it within just one Vue
+/*
+    new Vue({
+        el:'#two_counters',
+        components: {
+            counter: {
+                template: '#counter-template',
+                props: ['subject'],
+                data: function () {
+                    return {
+                        counters: 0
+                    };
+                }
+            }
+        }
+    });
+*/
+
 </script>
 </body>
 </html>
