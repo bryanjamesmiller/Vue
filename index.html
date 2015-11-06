@@ -57,6 +57,10 @@
     <button type="button" @click="updateCount">
         Increment Counter:{{ count }}
     </button>
+
+    <button type="button" @click="updateCount">
+        Increment Counter:{{ count2 }}
+    </button>
 </div>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.min.js"></script>
@@ -84,12 +88,14 @@
 </script>
 <script>
     var data = {
-        count:0
+        count:0,
+        count2:'none'
     };
 
     new Vue({
        el:'#submitter',
-        methods:[{
+        data:data,
+        methods:{
             handleIt:function(e){
                 alert('Handled');
                 e.preventDefault();
@@ -97,7 +103,7 @@
             updateCount:function(){
                 this.count += 1;
             }
-        }]
+        }
     });
 </script>
 </body>
