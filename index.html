@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -40,11 +40,23 @@
 </div>
 
 <div id="submitter">
-    <form action="done.html" v-on:submit:"handleIt">
+    <!-- Could alternatively erase the controller method block
+    and do v-on:submit.prevent="handleIt" -->
+    <!-- OR erase the controller method block
+    and do @submit.prevent="handleIt" -->
+    <form action="done.html" @submit="handleIt">
         <button type="submit">
             Submit Me!
         </button>
     </form>
+    <!-- @click and @submit are like event handlers -->
+    <!-- An alternate way is to put a small function directly
+    after the event handler like this:
+    <button type="submit" @click="count += 1">
+    -->
+    <button type="button" @click="updateCount">
+        Increment Counter:{{ count }}
+    </button>
 </div>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.min.js"></script>
@@ -72,17 +84,20 @@
 </script>
 <script>
     var data = {
-
+        count:0
     };
 
     new Vue({
        el:'#submitter',
-        methods:{
+        methods:[{
             handleIt:function(e){
                 alert('Handled');
                 e.preventDefault();
+            },
+            updateCount:function(){
+                this.count += 1;
             }
-        }
+        }]
     });
 </script>
 </body>
