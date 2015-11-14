@@ -2,24 +2,32 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>My Vue 1.* Laracasts workthrough</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 </head>
 <body>
 
-<!-- Container for your MVC "view" (Vue) - Vue only knows about what's inside-->
-<div id="app">
-    <h1>{{ message }}</h1>
-    <input v-model="message">  <!-- Updating this form will also update the heading -->
+<div class="container">
+    <!-- Container for your MVC "view" (Vue) - Vue only knows about what's inside-->
+    <div id="app">
+        <h1 v-cloak>{{ message }}</h1>
+        <input v-model="message">  <!-- Updating this form will also update the heading -->
 
-    <pre>
-        {{$data | json}}
-    </pre>
-</div>
+        <pre>
+            {{$data | json}}
+        </pre>
+    </div>
 
+    <hr>
 
-<div id="error_message">
-    <form>
-        <!-- note that v-show and v-if are conditional statements, notice the not sign "!" -->
+    <div id="error_message">
+        <form>
+            <!-- note that v-show and v-if are conditional statements, notice the not sign "!" -->
         <span class="error" v-show="!message">
             You must enter a message
         </span>
@@ -28,93 +36,104 @@
 
         </textarea>
 
-        <!-- v-show and v-if are conditional statements, no not sign here "!" -->
-        <button type="submit" v-show="message">
-            Send Message
-        </button>
-    </form>
+            <!-- v-show and v-if are conditional statements, no not sign here "!" -->
+            <button class="btn btn-primary" type="submit" v-show="message">
+                Send Message
+            </button>
+        </form>
 
-    <pre>
-        {{$data | json}}
-    </pre>
-</div>
-
-<div id="submitter">
-    <!-- Could alternatively erase the controller method block
-    and do v-on:submit.prevent="handleIt" -->
-    <!-- OR erase the controller method block
-    and do @submit.prevent="handleIt" -->
-    <form action="done.html" @submit="handleIt">
-        <button type="submit">
-            Submit Me!
-        </button>
-    </form>
-    <!-- @click and @submit are like event handlers -->
-    <!-- An alternate way is to put a small function directly
-    after the event handler like this:
-    <button type="submit" @click="count += 1">
-    -->
-    <button type="button" @click="updateCount">
-        Increment Counter:{{ count }}
-    </button>
-
-    <button type="button" @click="updateCount">
-        Increment Counter:{{ count2 }}
-    </button>
-</div>
-
-<div id="two_counters">
-    <x-counter subject="Likes"></x-counter>
-    <x-counter subject="Dislikes"></x-counter>
-</div>
-
-<!-- Notice the template goes outside of the Vue's scope with the div and id above-->
-<template id="counter-template">
-    <h1>{{ subject }}</h1>
-    <button @click="counters += 1">{{counters}}</button>
-</template>
-
-<div id="computed_events">
-    <h1>{{ skill }}</h1>
-    <input type="text" v-model="points">
-    <h1>{{ full_name }}</h1>
-    <input type="text" v-model="first">
-    <input type="text" v-model="last">
-
-</div>
-<br>
-
-<div id="subscription">
-    <pre>{{ $data | json }}</pre>
-
-    <div v-for="plan in plans">
-
-        <!-- By binding both "plan" and "active" we can pass data
-        through like a parameter to our method in the component.
-        The .sync makes it be able to pass data back up as well as
-        down.  2-way binding.  -->
-        <plan :plan="plan" :active.sync="active"></plan>
+        <pre>
+            {{$data | json}}
+        </pre>
     </div>
-</div>
 
-<template id="plan-template">
-    <div>
+    <hr>
 
-        <span>{{plan.name}}</span>
-        <span>{{plan.price}}/month</span>
-        <button @click="setActivePlan" v-show="plan.name !== active.name">
-            {{ isUpgrade ? 'Upgrade' : 'Downgrade'}}
+    <div id="submitter">
+        <!-- Could alternatively erase the controller method block
+        and do v-on:submit.prevent="handleIt" -->
+        <!-- OR erase the controller method block
+        and do @submit.prevent="handleIt" -->
+        <form action="done.html" @submit="handleIt">
+            <button class="btn btn-primary" type="submit">
+                Submit Me!
+            </button>
+        </form>
+        <!-- @click and @submit are like event handlers -->
+
+        <hr>
+
+        <!-- An alternate way is to put a small function directly
+        after the event handler like this:
+        <button class="btn btn-primary" type="submit" @click="count += 1">
+        -->
+
+        <button class="btn btn-primary" type="button" @click="updateCount" v-cloak>
+            Increment Counter:{{ count }}
         </button>
-        <!-- v-else can work with v-show or v-if conditionals -->
-        <button v-else>Selected</button>
+
+        <button class="btn btn-primary" type="button" @click="updateCount" v-cloak>
+            Increment Counter:{{ count2 }}
+        </button>
+    </div>
+
+    <hr>
+
+    <div id="two_counters" >
+        <x-counter subject="Likes" v-cloak></x-counter>
+        <x-counter subject="Dislikes" v-cloak></x-counter>
+    </div>
+
+    <!-- Notice the template goes outside of the Vue's scope with the div and id above-->
+    <template id="counter-template">
+        <h1 v-cloak>{{ subject }}</h1>
+        <button class="btn btn-primary" @click="counters += 1">{{counters}}</button>
+    </template>
+
+    <hr>
+
+    <div id="computed_events">
+        <h1 v-cloak>{{ skill }}</h1>
+        <input type="text" v-model="points">
+        <h1 v-cloak>{{ full_name }}</h1>
+        <input type="text" v-model="first">
+        <input type="text" v-model="last">
+
+    </div>
+
+    <hr>
+
+    <div id="subscription">
         <pre>{{ $data | json }}</pre>
 
-        <br>
-        <br>
+        <div v-for="plan in plans">
+
+            <!-- By binding both "plan" and "active" we can pass data
+            through like a parameter to our method in the component.
+            The .sync makes it be able to pass data back up as well as
+            down.  2-way binding.  -->
+            <plan :plan="plan" :active.sync="active"></plan>
+        </div>
     </div>
-</template>
 
+    <template id="plan-template">
+        <div>
 
+            <span>{{plan.name}}</span>
+            <span>{{plan.price}}/month</span>
+            <button class="btn btn-primary" @click="setActivePlan" v-show="plan.name !== active.name">
+                {{ isUpgrade ? 'Upgrade' : 'Downgrade'}}
+            </button>
+            <!-- v-else can work with v-show or v-if conditionals -->
+            <button class="btn btn-primary" v-else>Selected</button>
+            <pre>{{ $data | json }}</pre>
+
+            <br>
+            <br>
+        </div>
+    </template>
+
+</div>
 <!-- Get full warnings in the developer console by not using the minified version of Vue-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.4/vue.js"></script>
 <script>
@@ -142,7 +161,7 @@
 <script>
     var data = {
         count:0,
-        count2:'none'
+        count2:'this counter won\'t change'
     };
 
     new Vue({
