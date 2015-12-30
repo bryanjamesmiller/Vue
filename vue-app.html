@@ -29,6 +29,7 @@
                 {{ task.activity }}
             </li>
         </ul>
+        <h2>This time we've created a reusable template.</h2>
         <my-task-component :list="tasks"></my-task-component>
         <my-task-component :list="[{'activity':'wash dishes', 'completed':false}, {'activity':'vacuum', 'completed':false}]"></my-task-component>
         <my-task-component :list="[{'activity':'wash car', 'completed':false}, {'activity':'plant garden', 'completed':true}]"></my-task-component>
@@ -36,7 +37,6 @@
 
 
     <template id="tasks-template">
-        <h2>A little different form the above, because this time we've created a reusable template</h2>
         <ul>
             <!--
             Note that you can apply some logic using brackets as this
