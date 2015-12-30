@@ -8,6 +8,9 @@
         .cross_off{
             text-decoration: line-through;
         }
+        #no_strikethrough {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -37,6 +40,9 @@
 
 
     <template id="tasks-template">
+        <h3>My Tasks
+            <span v-show="remaining">({{ remaining }} Tasks Left)</span>
+        </h3>
         <ul>
             <!--
             Note that you can apply some logic using brackets as this
@@ -48,11 +54,17 @@
                     :class="{'cross_off':task.completed }"
                     @click="task.completed = ! task.completed;">
                 {{ task.activity }}
+                <strong @click="deleteTask(task)" id="no_strikethrough">X</strong>
             </li>
+
         </ul>
+        <p v-show="! list.length">No tasks left!</p>
+
+        <button @click="clearCompleted" class="btn btn-md">Remove Completed Tasks</button>
     </template>
 </div>
 
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.13/vue.min.js"></script>
 <script src="list_app.js"></script>
