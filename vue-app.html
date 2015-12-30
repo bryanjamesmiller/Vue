@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List App</title>
+    <style type="text/css">
+        .cross_off{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="list_app">
+        <h1>Click to cross off item.</h1>
+        <h2>Click again to toggle.</h2>
+        <ul>
+            <!--
+            Note that you can apply some logic using brackets as this
+            is an "do-if" statement equivalent: {'cross_off':task.completed }
+            add the CSS class "cross-of" if the task.completed value is set to true in list_app.js
+            -->
+            <li :class="{'cross_off':task.completed }"
+                v-for="task in tasks"
+            @click="toggle_cross_off_class(task)">
+                {{ task.activity }}
+            </li>
+        </ul>
+    </div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.13/vue.min.js"></script>
+<script src="list_app.js"></script>
+</body>
+</html>
