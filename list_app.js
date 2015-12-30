@@ -2,6 +2,12 @@
  * Created by B on 12/29/2015.
  */
 
+Vue.component('my-task-component',
+    {
+        template: '#tasks-template',
+        props:['list']
+    });
+
 new Vue({
    el: '#list_app',
     data:{

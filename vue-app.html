@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List App</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
         .cross_off{
             text-decoration: line-through;
@@ -11,8 +12,9 @@
 </head>
 <body>
 
+<div class="container">
     <div id="list_app">
-        <h1>Click to cross off item.</h1>
+        <h1>Click to cross off an item.</h1>
         <h2>Click again to toggle.</h2>
         <ul>
             <!--
@@ -20,13 +22,38 @@
             is an "do-if" statement equivalent: {'cross_off':task.completed }
             add the CSS class "cross-of" if the task.completed value is set to true in list_app.js
             -->
+
             <li :class="{'cross_off':task.completed }"
                 v-for="task in tasks"
-            @click="toggle_cross_off_class(task)">
+                @click="toggle_cross_off_class(task)">
                 {{ task.activity }}
             </li>
         </ul>
+        <my-task-component :list="tasks"></my-task-component>
+        <my-task-component :list="[{'activity':'wash dishes', 'completed':false}, {'activity':'vacuum', 'completed':false}]"></my-task-component>
+        <my-task-component :list="[{'activity':'wash car', 'completed':false}, {'activity':'plant garden', 'completed':true}]"></my-task-component>
     </div>
+
+
+    <template id="tasks-template">
+        <h2>A little different form the above, because this time we've created a reusable template</h2>
+        <ul>
+            <!--
+            Note that you can apply some logic using brackets as this
+            is an "do-if" statement equivalent: {'cross_off':task.completed }
+            add the CSS class "cross-of" if the task.completed value is set to true in list_app.js
+            -->
+            <li
+                    v-for="task in list"
+                    :class="{'cross_off':task.completed }"
+                    @click="task.completed = ! task.completed;">
+                {{ task.activity }}
+            </li>
+        </ul>
+    </template>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.13/vue.min.js"></script>
 <script src="list_app.js"></script>
 </body>
